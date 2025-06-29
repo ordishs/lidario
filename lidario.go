@@ -39,6 +39,25 @@ type LasFile struct {
 	sync.RWMutex
 }
 
+// NewLidarFile creates a new LidarFile (either LAS or LAZ) based on file type detection
+func NewLidarFile(fileName, fileMode string) (LidarFile, error) {
+	// Detect file type
+	if isLazFile(fileName) {
+		lazFile, err := NewLazFile(fileName, fileMode)
+		if err != nil {
+			return nil, err
+		}
+		return lazFile, nil
+	}
+	
+	// Default to LAS file
+	lasFile, err := NewLasFile(fileName, fileMode)
+	if err != nil {
+		return nil, err
+	}
+	return lasFile, nil
+}
+
 // NewLasFile creates a new LasFile structure.
 func NewLasFile(fileName, fileMode string) (*LasFile, error) {
 	fileMode = strings.ToLower(fileMode)

@@ -4,7 +4,21 @@ lidario
 Description
 -----------
 
-lidario is a simple library for reading and writing LiDAR files stored in LAS format. The library is written using the Go programing language. Use the *build.py* file to build/install the source code. The script can also be used to run the tests.
+lidario is a simple library for reading and writing LiDAR files stored in LAS format, with experimental support for LAZ (compressed) files. The library is written using the Go programming language.
+
+Building
+--------
+
+Use the Makefile for building and testing:
+
+```bash
+make help          # Show all available targets
+make all           # Run lint, test, and build
+make test          # Run tests
+make install-deps  # Install C dependencies (LASzip)
+```
+
+Or use the legacy *build.py* file to build/install the source code.
 
 Example Usage
 --------------
